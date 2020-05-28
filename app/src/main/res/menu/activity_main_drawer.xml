@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_float_view"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="@string/menu_FloatView"/>
+        <item
+                android:id="@+id/nav_about_me"
+                android:icon="@android:drawable/ic_dialog_alert"
+                android:title="@string/menu_aboutMe"/>
+    </group>
+
+    <item android:title="Communicate"
+          android:visible="true"
+        >
+        <menu>
+            <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="1"/>
+            <item
+                    android:id="@+id/nav_send"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="2"/>
+        </menu>
+    </item>
+
+</menu>
