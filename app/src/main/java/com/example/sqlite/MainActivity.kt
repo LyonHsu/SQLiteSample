@@ -35,8 +35,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fab: FloatingActionButton = findViewById(R.id.fab)
         var boolean = true
         fab.setOnClickListener { view ->
-            if(boolean)
-            memberDatabaseHelper.addName("Alice")
+            boolean=!boolean
+            if(boolean) {
+                memberDatabaseHelper.addName("Alice")
+            }
             else{
                 memberDatabaseHelper.addName("Lyon")
             }

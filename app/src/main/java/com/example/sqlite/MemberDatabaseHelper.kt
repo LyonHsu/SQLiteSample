@@ -12,6 +12,8 @@ import kotlin.collections.ArrayList
 
 /**
  * https://ithelp.ithome.com.tw/articles/10193711
+ *
+ * https://www.jianshu.com/p/06309249f2a0
  */
 val DBNAME = "example.db"
 val DB_VERSION=4
@@ -36,17 +38,21 @@ class MemberDatabaseHelper (context: Context): SQLiteOpenHelper(context, DBNAME,
     fun addName(name:String) {
         val values = ContentValues()
         values.put(NAME, name)
-        values.put(TIME, SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(Date()))
+        values.put(TIME, SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Date()))
         writableDatabase.insert(tableName, null, values)
     }
 
     fun remove(){
-        val id =getNames()[0].id
+        val array = getNames()
+        val len = array.size
+        val id =getNames()[len-1].id
         writableDatabase.delete(tableName,ID+"="+id,null)
     }
 
+
     fun getNames(): ArrayList<ItemModel> {
-        val cursor = readableDatabase.query(tableName, arrayOf(ID, NAME,TIME), null, null, null, null, null)
+        //依照時間排序
+        val cursor = readableDatabase.query(tableName, arrayOf(ID, NAME,TIME), null, null, null, null, TIME)
         val members = ArrayList<ItemModel>()
 
         try {
@@ -68,6 +74,8 @@ class MemberDatabaseHelper (context: Context): SQLiteOpenHelper(context, DBNAME,
                 cursor.close()
             }
         }
+        //反序
+        Collections.reverse(members);
 
         LogUtile.d(tableName,"總共有 ${cursor.count} 筆資料")
         return members
